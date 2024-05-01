@@ -1,6 +1,21 @@
+using Travela.BusinessLayer.Abstract;
+using Travela.BusinessLayer.Concrete;
+using Travela.DataAccessLayer.Abstract;
+using Travela.DataAccessLayer.Concrete;
+using Travela.DataAccessLayer.Context;
+using Travela.DataAccessLayer.EntityFramework;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<TravelaContext>();
+
+builder.Services.AddScoped<ICategoryDal,EfCategoryDal>();
+builder.Services.AddScoped<ICategoryService,CategoryManager>();
+
+builder.Services.AddScoped<IDestinationDal, EfDestinationDal>();
+builder.Services.AddScoped<IDestinationService, DestinationManager>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
